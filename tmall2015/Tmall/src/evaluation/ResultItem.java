@@ -10,4 +10,11 @@ public class ResultItem {
 	public String toString(){
 		return userId+", "+itemId;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		if (!(o instanceof ResultItem)) return false;
+		ResultItem other = (ResultItem)o;
+		return (userId == other.userId && itemId == other.itemId);
+	}
 }

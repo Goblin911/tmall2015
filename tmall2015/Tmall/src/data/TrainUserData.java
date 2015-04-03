@@ -19,7 +19,7 @@ public class TrainUserData {
 	
 	
 	public static void arrange(){
-		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+		//System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 		Collections.sort(userBehaviors);
 		for(UserBehavior bhv: userBehaviors){
 			if (!map.containsKey(bhv.userId))
@@ -36,5 +36,16 @@ public class TrainUserData {
 	private static String defaultDatePattern = "yyyy-MM-dd HH";
 	public static void setTrainEndTime(String time) throws ParseException {
 		trainEndTime = new SimpleDateFormat(defaultDatePattern).parse(time);
+	}
+
+
+	public static LinkedList<UserBehavior> getTestData() throws Exception {
+		if (trainEndTime == null) throw new Exception("trainEndTime is not set");
+		LinkedList<UserBehavior> test = new LinkedList<UserBehavior>();
+		for(UserBehavior bhv: userBehaviors){
+			if (bhv.time.compareTo(trainEndTime)>=0) 
+				test.add(bhv);
+		}
+		return test;
 	}
 }
