@@ -22,4 +22,8 @@ public class ActionTime implements Comparable<Date>{
 		return (sub>0)?1:-1;
 	}
 	
+	public long beforeTrain(){
+		return TrainUserData.trainEndTime.getTime() - date.getTime();
+	}
+	
 }

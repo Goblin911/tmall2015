@@ -3,6 +3,7 @@ package evaluation;
 import java.util.LinkedList;
 
 import data.BehaviorType;
+import data.TrainItemData;
 import data.TrainUserData;
 import data.UserBehavior;
 
@@ -23,7 +24,7 @@ public class F1Evaluation {
 		LinkedList<UserBehavior> testData = TrainUserData.getTestData();
 		groundTruth = new Result();
 		for(UserBehavior bhv: testData){
-			if (bhv.behaviorType == BehaviorType.BUY)
+			if (bhv.behaviorType == BehaviorType.BUY && TrainItemData.checkItem(bhv.itemId))
 				groundTruth.addResultItem(bhv.userId, bhv.itemId);
 		}
 	}
@@ -34,6 +35,11 @@ public class F1Evaluation {
 		}
 		precision = (double)tp/result.result.size();
 		recall = (double)tp/groundTruth.result.size();
+		
+		System.out.println("result size: "+result.result.size());
+		System.out.println("groundTruth size: "+groundTruth.result.size());
+		System.out.println("tp size: "+tp);
+		
 		return 2*(precision*recall)/(precision+recall);
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class TrainUserData {
 	static LinkedList<UserBehavior> userBehaviors = new LinkedList<UserBehavior>();
@@ -32,7 +33,7 @@ public class TrainUserData {
 		return map.get(userId);
 	}
 	
-	static Date trainEndTime;
+	public static Date trainEndTime;
 	private static String defaultDatePattern = "yyyy-MM-dd HH";
 	public static void setTrainEndTime(String time) throws ParseException {
 		trainEndTime = new SimpleDateFormat(defaultDatePattern).parse(time);
@@ -48,4 +49,16 @@ public class TrainUserData {
 		}
 		return test;
 	}
+
+
+	public static LinkedList<UserBehavior> getTrainData() throws Exception {
+		if (trainEndTime == null) throw new Exception("trainEndTime is not set");
+		LinkedList<UserBehavior> train = new LinkedList<UserBehavior>();
+		for(UserBehavior bhv: userBehaviors){
+			if (bhv.time.compareTo(trainEndTime)<0) 
+				train.add(bhv);
+		}
+		return train;
+	}
+
 }
