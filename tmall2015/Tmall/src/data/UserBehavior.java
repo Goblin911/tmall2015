@@ -36,7 +36,7 @@ public class UserBehavior implements Comparable<UserBehavior>{
 		sb.append(itemId+"\t");
 		sb.append(behaviorType+"\t");
 		sb.append(itemCategory+"\t");
-		sb.append(time+"\n");
+		sb.append(time);
 		return sb.toString();
 	}
 	

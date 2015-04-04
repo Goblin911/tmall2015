@@ -3,6 +3,7 @@ package data;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintStream;
 import java.util.LinkedList;
 
 public class DataReader {
@@ -37,7 +38,8 @@ public class DataReader {
 
 				while ((line = reader.readLine()) != null) {
 					UserBehavior bhv = TrainUserData.addBehavior(line);
-					if (TrainItemData.checkItem(bhv.itemId)) bhv.targetItem = true;
+					if (TrainItemData.checkItem(bhv.itemId))
+						bhv.targetItem = true;
 					userLine++;
 					if (userLine % 1000000 == 0)
 						System.out.println(userLine);
@@ -45,12 +47,26 @@ public class DataReader {
 				reader.close();
 				System.out.println("User Line: " + userLine);
 				TrainUserData.arrange();
-				System.out.println("User Num: " + TrainUserData.map.keySet().size());
+				System.out.println("User Num: "
+						+ TrainUserData.map.keySet().size());
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
+		}
+	}
+
+	public void dumpSortedTrain(PrintStream printer) {
+		for (UserBehavior bhv : TrainUserData.userBehaviors) {
+			printer.println(bhv);
+		}
+	}
+
+	public void dumpSortedFilteredTrain(PrintStream printer) {
+		for (UserBehavior bhv : TrainUserData.userBehaviors) {
+			if (TrainItemData.checkItem(bhv.itemId))
+				printer.println(bhv);
 		}
 	}
 

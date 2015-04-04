@@ -28,7 +28,7 @@ public class Main {
 			double F1Score = eval.getF1Score(result);
 			System.out.println("F1: "+F1Score+" precision: "+eval.getPrecision()+" recall: "+eval.getRecall());
 		}
-		PrintStream printer = new PrintStream("result.txt");
+		PrintStream printer = new PrintStream("result.csv");
 		result.dump(printer);
 		printer.close();
 	}

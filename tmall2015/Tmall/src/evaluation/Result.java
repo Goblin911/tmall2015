@@ -12,10 +12,10 @@ public class Result {
 		return ri;
 	}
 	public void dump(PrintStream printer) {
-		printer.println("user_id, item_id");
+		printer.println("user_id,item_id");
 		for(ResultItem ri:result){
 			printer.println(ri);
 		}
-		
+		System.out.println("Result output to result.csv");
 	}
 }

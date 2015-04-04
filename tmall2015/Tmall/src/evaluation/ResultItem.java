@@ -8,7 +8,7 @@ public class ResultItem {
 		this.itemId = itemId;
 	}
 	public String toString(){
-		return userId+", "+itemId;
+		return userId+","+itemId;
 	}
 	
 	@Override
